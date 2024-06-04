@@ -24,14 +24,21 @@ export function initRegisterForm() {
       password,
     };
 
-    const data = await register(userData);
+    const data = await register(userData)
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("Erro ao cadastrar usuário: ", error);
+        alert("Erro ao cadastrar usuário: ", error);
+        return error;
+      });
     if (data.error) {
-      alert(data.message);
+      console.error(data.message);
+      alert("Erro ao cadastrar usuário: " + data.message);
     } else {
       alert("Usuário cadastrado com sucesso!");
-
       window.location.href = "/#login";
     }
-    console.log(userData);
   });
 }

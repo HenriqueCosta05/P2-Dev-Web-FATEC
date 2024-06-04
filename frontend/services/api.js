@@ -43,17 +43,17 @@ export const createCustomPokemon = async (pokemon) => {
   return data;
 };
 
-export const updateCustomPokemon = async (pokemon) => {
+export const updateCustomPokemon = async (pokemonName, newPokemon) => {
   const tokenData = await getToken();
   const response = await fetch(
-    `http://localhost:8001/pokemons/${pokemon.name}`,
+    `http://localhost:8001/pokemons/${pokemonName}`,
     {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${tokenData}`,
       },
-      body: JSON.stringify(pokemon),
+      body: JSON.stringify(newPokemon),
     }
   );
   const data = await response.json();

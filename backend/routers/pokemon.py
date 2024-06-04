@@ -33,6 +33,7 @@ async def update_existing_pokemon(name: str, pokemon: Pokemon, current_user: Acc
     db_pokemon = await get_pokemon_by_name(name)
     if not db_pokemon:
         raise HTTPException(status_code=404, detail="Pokemon not found")
+    pokemon.image = await get_pokemon_image(pokemon.name.lower())
     await update_pokemon(name, pokemon)
     return {"msg": "Pokemon updated successfully"}
 
@@ -44,7 +45,7 @@ async def delete_existing_pokemon(name: str, current_user: AccessToken = Depends
     await delete_pokemon(name)
     return {"msg": "Pokemon deleted successfully"}
 
-@router.get("/pokemons/{name}")
+@router.get("/pokemon/{name}")
 async def get_pokemon(name: str, current_user: AccessToken = Depends(get_current_user)):
     db_pokemon = await get_pokemon_by_name(name)
     if not db_pokemon:

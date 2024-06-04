@@ -9,7 +9,7 @@ async def get_pokemon_list():
     return [Pokemon.parse_obj(pokemon) for pokemon in pokemons]
 
 async def get_pokemon_by_name(name: str):
-    return await database["pokemons"].find_one({"name": name})
+    return await database["pokemons"].find_one({"name": name}, {"_id": 0})
 
 async def create_pokemon(pokemon: Pokemon):
     await database["pokemons"].insert_one(pokemon.dict())
