@@ -2,12 +2,14 @@ import { initLoginForm } from "./components/LoginForm.js";
 import { initPokemonForm } from "./components/PokemonForm.js";
 import { initPokemonList } from "./components/PokemonList.js";
 import { initRegisterForm } from "./components/RegisterForm.js";
+import { modalLayout } from "./components/Unauthorized.js";
 
 const routes = {
   pokemons: initPokemonList,
   login: initLoginForm,
   cadastro: initRegisterForm,
   "novo-pokemon": initPokemonForm,
+  unauthorized: modalLayout,
 };
 
 function router() {

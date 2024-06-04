@@ -1,5 +1,7 @@
+import { saveToken, getToken } from "../indexedDBUtils.js";
+
 export const register = async (loginData) => {
-  const response = await fetch("http://localhost:8000/register", {
+  const response = await fetch("http://localhost:8001/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +13,7 @@ export const register = async (loginData) => {
 };
 
 export const login = async (username, password) => {
-  const response = await fetch("http://localhost:8000/login", {
+  const response = await fetch("http://localhost:8001/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,16 +21,6 @@ export const login = async (username, password) => {
     body: JSON.stringify({ username, password }),
   });
   const data = await response.json();
-  return data;
-};
-
-export const logout = async () => {
-  const response = await fetch("http://localhost:8000/logout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
+  saveToken(data.access_token);
   return data;
 };

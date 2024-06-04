@@ -1,4 +1,3 @@
-
 // Funções para salvar e recuperar o token de autenticação no IndexedDB
 export const saveToken = (token) => {
   const openRequest = indexedDB.open("auth", 1); // Nome do banco de dados e versão
@@ -34,11 +33,11 @@ export const saveToken = (token) => {
 
 // Função para remover o token de autenticação do IndexedDB
 export const removeToken = () => {
-  return new Promise<void>((resolve, reject) => {
-      const openRequest = indexedDB.open("auth", 1); // Nome do banco de dados e versão
-      
-        // Se o banco de dados não existir, cria um novo
-      openRequest.onupgradeneeded = function (event) {
+  return new Promise((resolve, reject) => {
+    const openRequest = indexedDB.open("auth", 1); // Nome do banco de dados e versão
+
+    // Se o banco de dados não existir, cria um novo
+    openRequest.onupgradeneeded = function (event) {
       const db = event.target.result;
       if (!db.objectStoreNames.contains("tokens")) {
         db.createObjectStore("tokens");
@@ -99,7 +98,7 @@ export const getToken = async () => {
         console.log("Error", tokenRequest.error);
         reject(tokenRequest.error);
       };
-    }; // This closing brace was missing
+    };
 
     openRequest.onerror = function () {
       console.log("Error", openRequest.error);
