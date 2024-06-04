@@ -19,9 +19,9 @@ export function initLoginForm() {
     const password = document.getElementById("password").value;
     await login(username, password).then((data) => {
       if (data.error) {
-        alert(data.message);
+        alert(data.detail);
       } else {
-        alert("Usuário logado com sucesso!");
+        alert(data.detail);
         window.location.href = "/#pokemons";
       }
     });

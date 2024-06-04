@@ -15,7 +15,7 @@ async def register(user: UserCreate):
     user_dict["hashed_password"] = hashed_password
     del user_dict["password"]
     await users_collection.insert_one(user_dict)
-    return {"msg": "User created successfully"}
+    return {"detail": "User created successfully"}
 
 @router.post("/login")
 async def login(form_data: UserLogin):
@@ -24,4 +24,4 @@ async def login(form_data: UserLogin):
         raise HTTPException(status_code=401, detail="Incorrect username or password")
     access_token = create_access_token(data={"sub": user.username})
     
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "detail": "Login successful"}

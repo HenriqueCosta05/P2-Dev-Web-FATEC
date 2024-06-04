@@ -63,10 +63,12 @@ export const navbarLayout = async () => {
           window.location.hash = "login";
         }
         window.location.reload();
+        updateLoginButton();
       } catch (error) {
         console.error("Error during login/logout: ", error);
         window.location.hash = "login";
         window.location.reload();
+        updateLoginButton();
       }
     });
 };

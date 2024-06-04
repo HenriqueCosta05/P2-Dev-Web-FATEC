@@ -18,6 +18,20 @@
     />
   </head>
   <body>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./cache.js")
+            .then((registration) => {
+              console.log("Registrado com sucesso");
+            })
+            .catch((error) => {
+              console.log("Erro ao registrar", error);
+            });
+        });
+      }
+    </script>
     <div id="navbar"></div>
     <div id="app"></div>
     <script src="./components/Navbar.js" type="module"></script>

@@ -34,10 +34,10 @@ export function initRegisterForm() {
         return error;
       });
     if (data.error) {
-      console.error(data.message);
+      console.error(data.detail);
       alert("Erro ao cadastrar usuário: " + data.message);
     } else {
-      alert("Usuário cadastrado com sucesso!");
+      alert(data.detail);
       window.location.href = "/#login";
     }
   });
